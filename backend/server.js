@@ -1,4 +1,4 @@
-const { obtenerPosts, agregarPost } = require('./consultas')
+const { obtenerPosts, agregarPost, borrarPost } = require('./consultas')
 const express = require('express')
 const app = express()
 app.use(express.json())
@@ -19,3 +19,10 @@ app.post("/posts", async (req, res) => {
     await agregarPost(titulo, url, descripcion)
     res.send("Post agregado con éxito")
 })
+
+app.delete("/posts/:id", async (req,res) =>{
+    const { id } = req.params
+    await borrarPost(id)
+    res.send("Post eliminado con éxito")
+})
+
